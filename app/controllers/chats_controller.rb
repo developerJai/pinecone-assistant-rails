@@ -14,6 +14,10 @@ class ChatsController < ApplicationController
     render json: { error: "Internal server error" }, status: :internal_server_error
   end
 
+  def privacy
+    
+  end
+
   private
 
   def chat_with_assistant(question)
