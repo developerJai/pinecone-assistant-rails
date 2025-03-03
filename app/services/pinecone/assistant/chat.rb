@@ -24,6 +24,7 @@ class Pinecone::Assistant::Chat
         }
       ],
       "stream": false,
+      "include_highlights": true,
       "model": "gpt-4o"
     })
 
