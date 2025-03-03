@@ -7,8 +7,8 @@ class ChatsController < ApplicationController
       return
     end
 
-    answer = chat_with_assistant(params[:question])
-    render json: { answer: answer }
+    response = chat_with_assistant(params[:question])
+    render json: response
   rescue StandardError => e
     Rails.logger.error("Error in chat: #{e.message}")
     render json: { error: "Internal server error" }, status: :internal_server_error
@@ -22,6 +22,6 @@ class ChatsController < ApplicationController
 
   def chat_with_assistant(question)
     response = Pinecone::Assistant::Chat.new.call(question)
-    response.dig("message", "content")
+    { answer: response.dig("message", "content"), citations: response.dig("citations") }
   end
 end
